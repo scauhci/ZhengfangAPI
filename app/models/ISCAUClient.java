@@ -43,8 +43,8 @@ public class ISCAUClient {
 	 * @throws IOException
 	 */
 	public static JSONObject getGrade(String account, String password,
-			String portal, String year, String term) throws IOException {
-		String urlStr = String.format("http://%s/edusys/goal/%s/%s/%s/%s/%s",
+			int portal, String year, String term) throws IOException {
+		String urlStr = String.format("http://%s/edusys/goal/%s/%s/%d/%s/%s",
 				host, account, encrypt(password), portal, year, term);
 		HttpURLConnection connection = HTTPUtils.getConnection(urlStr);
 		if (connection.getResponseCode() != 200)
@@ -55,15 +55,15 @@ public class ISCAUClient {
 
 	/**
 	 * 获取学生课表
-	 * 
-	 * @param year
-	 * @param term
+	 * @param account
+	 * @param password
+	 * @param portal
 	 * @return
 	 * @throws IOException
 	 */
 	public static JSONObject getTimeTable(String account, String password,
-			String portal) throws IOException {
-		String urlStr = String.format("http://%s/edusys/classtable/%s/%s/%s",
+			int portal) throws IOException {
+		String urlStr = String.format("http://%s/edusys/classtable/%s/%s/%d",
 				host, account, encrypt(password), portal);
 		HttpURLConnection connection = HTTPUtils.getConnection(urlStr);
 		if (connection.getResponseCode() != 200)
@@ -74,14 +74,16 @@ public class ISCAUClient {
 
 	/**
 	 * 获取选修课
-	 * 
+	 * @param account
+	 * @param password
+	 * @param portal
 	 * @return
 	 * @throws IOException
 	 */
 	public static JSONObject getOptionalCourse(String account, String password,
-			String portal) throws IOException {
+			int portal) throws IOException {
 		String urlStr = String.format(
-				"http://%s/edusys/pickclassinfo/%s/%s/%s", host, account,
+				"http://%s/edusys/pickclassinfo/%s/%s/%d", host, account,
 				encrypt(password), portal);
 		HttpURLConnection connection = HTTPUtils.getConnection(urlStr);
 		if (connection.getResponseCode() != 200)
@@ -92,7 +94,8 @@ public class ISCAUClient {
 
 	/**
 	 * 获取已借阅图书
-	 * 
+	 * @param account
+	 * @param password
 	 * @return
 	 * @throws IOException
 	 */
@@ -109,13 +112,15 @@ public class ISCAUClient {
 
 	/**
 	 * 获取考试信息
-	 * 
+	 * @param account
+	 * @param password
+	 * @param portal
 	 * @return
 	 * @throws IOException
 	 */
 	public static JSONObject getExamInfo(String account, String password,
-			String portal) throws IOException {
-		String urlStr = String.format("http://%s/edusys/exam/%s/%s/%s", host,
+			int portal) throws IOException {
+		String urlStr = String.format("http://%s/edusys/exam/%s/%s/%d", host,
 				account, encrypt(password), portal);
 		HttpURLConnection connection = HTTPUtils.getConnection(urlStr);
 		if (connection.getResponseCode() != 200)
@@ -126,9 +131,7 @@ public class ISCAUClient {
 
 	/**
 	 * 查找图书
-	 * 
 	 * @param keyWord
-	 * @param portal
 	 * @return
 	 * @throws IOException
 	 */
@@ -144,7 +147,6 @@ public class ISCAUClient {
 
 	/**
 	 * 获取出错信息
-	 * 
 	 * @param connection
 	 * @return
 	 * @throws IOException
