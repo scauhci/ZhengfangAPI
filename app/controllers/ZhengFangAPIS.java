@@ -25,11 +25,16 @@ public class ZhengFangAPIS extends Controller {
 	 *            服务器号（1-6）
 	 * @throws IOException
 	 */
-	public static void getTimeTable(String account, String password, int portal)
-			throws IOException {
+	public static void getTimeTable(String account, String password, int portal){
 		portal = (portal >= 1 && portal <= 6) ? portal : 1;
-		JSONObject json = ISCAUClient.getTimeTable(account, password, portal);
-		renderJSON(json.toString());
+		JSONObject json;
+		try {
+			json = ISCAUClient.getTimeTable(account, password, portal);
+			renderJSON(json.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+			renderText("error");
+		}
 	}
 
 	/**
