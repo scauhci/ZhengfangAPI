@@ -19,7 +19,8 @@ public class HTTPUtils {
 	public static HttpURLConnection getConnection(String urlStr)
 			throws IOException {
 		URL url = new URL(urlStr);
-		return (HttpURLConnection) url.openConnection();
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		return connection;
 	}
 
 }

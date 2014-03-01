@@ -41,9 +41,10 @@ public class ISCAUClient {
 	 * @param term
 	 * @return
 	 * @throws IOException
+	 * @throws JSONException 
 	 */
 	public static JSONObject getGrade(String account, String password,
-			int portal, String year, String term) throws IOException {
+			int portal, String year, String term) throws IOException, JSONException {
 		String urlStr = String.format("http://%s/edusys/goal/%s/%s/%d/%s/%s",
 				host, account, encrypt(password), portal, year, term);
 		HttpURLConnection connection = HTTPUtils.getConnection(urlStr);
@@ -60,9 +61,10 @@ public class ISCAUClient {
 	 * @param portal
 	 * @return
 	 * @throws IOException
+	 * @throws JSONException 
 	 */
 	public static JSONObject getTimeTable(String account, String password,
-			int portal) throws IOException {
+			int portal) throws IOException, JSONException {
 		String urlStr = String.format("http://%s/edusys/classtable/%s/%s/%d",
 				host, account, encrypt(password), portal);
 		HttpURLConnection connection = HTTPUtils.getConnection(urlStr);
@@ -79,9 +81,10 @@ public class ISCAUClient {
 	 * @param portal
 	 * @return
 	 * @throws IOException
+	 * @throws JSONException 
 	 */
 	public static JSONObject getOptionalCourse(String account, String password,
-			int portal) throws IOException {
+			int portal) throws IOException, JSONException {
 		String urlStr = String.format(
 				"http://%s/edusys/pickclassinfo/%s/%s/%d", host, account,
 				encrypt(password), portal);
@@ -98,9 +101,10 @@ public class ISCAUClient {
 	 * @param password
 	 * @return
 	 * @throws IOException
+	 * @throws JSONException 
 	 */
 	public static JSONObject getBooks(String account, String password)
-			throws IOException {
+			throws IOException, JSONException {
 		String urlStr = String.format("http://%s/lib/list/now/%s/%s", host,
 				account, encrypt(password));
 		HttpURLConnection connection = HTTPUtils.getConnection(urlStr);
@@ -117,9 +121,10 @@ public class ISCAUClient {
 	 * @param portal
 	 * @return
 	 * @throws IOException
+	 * @throws JSONException 
 	 */
 	public static JSONObject getExamInfo(String account, String password,
-			int portal) throws IOException {
+			int portal) throws IOException, JSONException {
 		String urlStr = String.format("http://%s/edusys/exam/%s/%s/%d", host,
 				account, encrypt(password), portal);
 		HttpURLConnection connection = HTTPUtils.getConnection(urlStr);
@@ -134,8 +139,9 @@ public class ISCAUClient {
 	 * @param keyWord
 	 * @return
 	 * @throws IOException
+	 * @throws JSONException 
 	 */
-	public static JSONObject searchBook(String keyWord) throws IOException {
+	public static JSONObject searchBook(String keyWord) throws IOException, JSONException {
 		String urlStr = String.format("http://%s/lib/search/%s/1", host,
 				encrypt(keyWord));
 		HttpURLConnection connection = HTTPUtils.getConnection(urlStr);
@@ -150,9 +156,10 @@ public class ISCAUClient {
 	 * @param connection
 	 * @return
 	 * @throws IOException
+	 * @throws JSONException 
 	 */
 	private static JSONObject getErrorMsg(HttpURLConnection connection)
-			throws IOException {
+			throws IOException, JSONException {
 		return new JSONObject(String.format("{error:%s,msg:%s}",
 				connection.getResponseCode(), connection.getResponseMessage()));
 	}

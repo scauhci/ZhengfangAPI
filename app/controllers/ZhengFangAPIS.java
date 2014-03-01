@@ -23,14 +23,15 @@ public class ZhengFangAPIS extends Controller {
 	 *            密码
 	 * @param portal
 	 *            服务器号（1-6）
+	 * @throws JSONException 
 	 * @throws IOException
 	 */
-	public static void getTimeTable(String account, String password, int portal){
+	public static void getTimeTable(String account, String password, int portal) throws JSONException{
 		portal = (portal >= 1 && portal <= 6) ? portal : 1;
 		JSONObject json;
 		try {
 			json = ISCAUClient.getTimeTable(account, password, portal);
-			renderJSON(json.toString());
+			renderText(json.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 			renderText("error");
@@ -51,7 +52,7 @@ public class ZhengFangAPIS extends Controller {
 	 * @throws IOException
 	 */
 	public static void getGrade(String account, String password, int portal,
-			String year, String term) throws JSONException, IOException {
+			String year, String term) throws IOException, JSONException {
 		portal = (portal >= 1 && portal <= 6) ? portal : 1;
 		JSONObject json = ISCAUClient.getGrade(account, password, portal, year,
 				term);
@@ -81,9 +82,10 @@ public class ZhengFangAPIS extends Controller {
 	 * @param account
 	 * @param password
 	 * @throws IOException
+	 * @throws JSONException 
 	 */
 	public static void getBooks(String account, String password)
-			throws IOException {
+			throws IOException, JSONException {
 		JSONObject json = ISCAUClient.getBooks(account, password);
 		renderJSON(json.toString());
 	}
@@ -94,8 +96,9 @@ public class ZhengFangAPIS extends Controller {
 	 * @param keyWord
 	 * @return
 	 * @throws IOException
+	 * @throws JSONException 
 	 */
-	public static void searchBook(String keyWord) throws IOException {
+	public static void searchBook(String keyWord) throws IOException, JSONException {
 		JSONObject json = ISCAUClient.searchBook(keyWord);
 		renderJSON(json.toString());
 	}
